@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+// use Illuminate\Support\Facades\Auth;  //Guard library
 
 class ResetPasswordController extends Controller
 {
@@ -36,4 +37,13 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    // You may also customize the "guard" that is used to authenticate and register users.
+    // To get started, define a guard method on your LoginController, RegisterController, and
+    // ResetPasswordController. The method should return a guard instance:
+    
+    // protected function guard()
+    // {
+    //     return Auth::guard('guard-name');
+    // }
 }

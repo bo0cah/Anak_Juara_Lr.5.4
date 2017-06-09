@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+// use Illuminate\Support\Facades\Auth;  //Guard library
 
 class RegisterController extends Controller
 {
@@ -68,4 +69,13 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    // You may also customize the "guard" that is used to authenticate and register users.
+    // To get started, define a guard method on your LoginController, RegisterController, and
+    // ResetPasswordController. The method should return a guard instance:
+    
+    // protected function guard()
+    // {
+    //     return Auth::guard('guard-name');
+    // }
 }

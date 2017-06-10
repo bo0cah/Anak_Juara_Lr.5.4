@@ -14,7 +14,7 @@
                 <a href="{{ URL::to('Pengaju-form') }}">
                     <div class="btn btn-primary btn-md" type="button">Pengajuan Baru</div>
                 </a>
-                <a href="{{ URL::to('unduhExcel/xls') }}">
+                <a href="{{ URL::to('unduhExcel/xlsx') }}">
                     <div class="btn btn-primary btn-md" type="button">Unduh Excel</div>
                 </a>
             </form>

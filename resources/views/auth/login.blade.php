@@ -38,7 +38,7 @@
                   <div class="form-group">
                      <div class="checkbox">
                         <label>
-                           <input type="checkbox" name="remember"> Ingat saya
+                           <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Ingat saya
                         </label>
                      </div>
                   </div>

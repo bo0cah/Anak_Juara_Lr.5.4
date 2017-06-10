@@ -11,10 +11,10 @@
                         <button class="btn btn-default btn-md" type="button"><i class="glyphicon glyphicon-search"></i> Cari</button>
                     </span>
                   </div><!-- /input-group -->
-                <a href="{{ URL::to('pengajuan-form') }}">
+                <a href="{{ URL::to('Pengaju-form') }}">
                     <div class="btn btn-primary btn-md" type="button">Pengajuan Baru</div>
                 </a>
-                <a href="{{ URL::to('unduhExcel/pdf') }}">
+                <a href="{{ URL::to('unduhExcel/xls') }}">
                     <div class="btn btn-primary btn-md" type="button">Unduh Excel</div>
                 </a>
             </form>
@@ -47,7 +47,7 @@
               </p>
               <!-- Split button -->
               <div class="btn-group">
-                <a href="{{ action('controllerPengajuan@profil', $pengaju->id)}}">
+                <a href="{{ action('PengajuController@profil', $pengaju->id)}}">
                   <button type="button" class="btn btn-primary btn-sm">Lihat Profil</button>
                 </a>
                 <a href="{{ URL::to('profil/cetak')}}">

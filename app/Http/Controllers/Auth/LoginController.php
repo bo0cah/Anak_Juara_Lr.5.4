@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;  //Guard library
-use Illuminate\Foundation\Auth\ThrottlesLogins  //user will not be able to login for one minute if they fail to provide the correct credentials after several attempts
+use Illuminate\Foundation\Auth\ThrottlesLogins;  //user will not be able to login for one minute if they fail to provide the correct credentials after several attempts
 
 class LoginController extends Controller
 {
@@ -28,7 +28,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-    protected $redirectAfterLogout = '/login';
+    // protected $redirectAfterLogout = '/login';
 
     /**
      * Create a new controller instance.
@@ -56,7 +56,4 @@ class LoginController extends Controller
     // {
     //     return Auth::guard('guard-name');
     // }
-
-
-
 }

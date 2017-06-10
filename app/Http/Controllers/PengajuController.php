@@ -3,34 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Pengaju as Pengajuan;
+use Carbon\Carbon;
 
-class PengajuanController extends Controller
-{   
-
+class PengajuController extends Controller
+{
     public function __construct()
     {
         $this->middleware('auth');
     }
     
-    public function index(){
-
+    public function index()
+    {
         $pengajuan = Pengajuan::all();
         //Halaman utama menampilkan Daftar pengajuan yang telah dirangking
-        return view('pengajuan.index')->with('pengajuan',$pengajuan);
+        return view('pengaju.index')->with('pengajuan', $pengajuan);
     }
 
-    public function profil($id){
+    public function profil($id)
+    {
         
         //mencari data pengaju di database berdasarkan id
         $pengaju = Pengajuan::find($id);
 
         return $pengaju->nama;
-        // return view('pengajuan.profil');
+        // return view('pengaju.profil');
     }
 
     public function form()
-    {   
-        return view('pengajuan.form');
+    {
+        return view('pengaju.form');
     }
 
     //new tes simpan
@@ -41,17 +48,17 @@ class PengajuanController extends Controller
 
         //data ayah
         if ($request->input('Ayah_Serumah')) {
-             $data['Alamat_Ayah'] = $AlamatAnak;
+            $data['Alamat_Ayah'] = $AlamatAnak;
         };
 
         //data ibu
         if ($request->input('Ibu_Serumah')) {
-             $data['Alamat_Ibu'] = $AlamatAnak;
+            $data['Alamat_Ibu'] = $AlamatAnak;
         };
 
         //data wali
         if ($request->input('Wali_Serumah')) {
-             $data['Alamat_Wali'] = $AlamatAnak;
+            $data['Alamat_Wali'] = $AlamatAnak;
         };
 
         //upload photo
@@ -70,13 +77,11 @@ class PengajuanController extends Controller
     public function unduhExcel($ext) //$ext variable pengatur Extensi file | csv xls xlsx
     {
         $data = Pengajuan::get()->toArray();
-        $output = Excel::create('Rangking Pengajuan Beasiswa Ceria', 
-                    function($excel) use ($data) 
-                    {
-                        $excel->sheet('Pengajuan', function($sheet) use ($data)
-                            {
-                                $sheet->fromArray($data);
-                            });
+        $output = Excel::create('Rangking Pengajuan Beasiswa Ceria',
+                    function ($excel) use ($data) {
+                        $excel->sheet('Pengajuan', function ($sheet) use ($data) {
+                            $sheet->fromArray($data);
+                        });
                     })->download($ext);
 
         return $output;
@@ -145,5 +150,4 @@ class PengajuanController extends Controller
 
         // return dd($data);
     }
-
 }

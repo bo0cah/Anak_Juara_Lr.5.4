@@ -10,46 +10,38 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => 'web'], function(){
-    
-    Route::auth();
-    
-    Route::get('/',['uses' => 'PengajuController@index','as' => 'pengajuan.index' ]);
+Route::auth();
 
-    Route::get('pengajuan-form',['uses' => 'PengajuController@form','as' => 'pengajuan-form' ]);
+Route::get('/',['uses' => 'PengajuController@index','as' => 'Pengaju.index' ]);
 
-    Route::post('pengajuan-form',['uses' => 'PengajuController@simpan','as' => 'pengajuan-simpan']);
+Route::get('Pengaju-form',['uses' => 'PengajuController@form','as' => 'Pengaju-form' ]);
 
-    Route::get('unduhExcel/{ext}', 'PengajuController@unduhExcel');
+Route::post('Pengaju-form',['uses' => 'PengajuController@simpan','as' => 'Pengaju-simpan']);
 
-    Route::post('unggahExcel', 'PengajuController@unggahExcel');
+Route::get('unduhExcel/{ext}', 'PengajuController@unduhExcel');
 
-    Route::get('profil/{id}',[ 'uses' => 'PengajuController@profil','as' => 'profil']);
+Route::post('unggahExcel', 'PengajuController@unggahExcel');
 
-    Route::get('profil-keluar','DataKeluarController@index');
+Route::get('profil/{id}',[ 'uses' => 'PengajuController@profil','as' => 'profil']);
 
-    Route::get('penerima', 'PenerimaController@index');
+Route::get('data-keluar','DataKeluarController@index');
 
-    Route::get('doc}', function () {
-        return view('documentation/document');
-    });
+Route::get('penerima', 'PenerimaController@index');
 
-    Route::get('/home', 'HomeController@index');
-
-    Route::get('/administrator', function () {
-        echo '<h1>Hai '.Auth::user()->name;
-    })->middleware('isAdmin');
+Route::get('doc', function () {
+    return view('documentation/document');
 });
 
-Route::get('users/{id}', function ($id) {
-    $user = App\Pengajuan::find("$id"); 
-    echo $user->nama."<br>";
-});
+Route::get('/home', 'HomeController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/administrator', function () {
+    echo '<h1>Hai '.Auth::user()->name;
+})->middleware('isAdmin');
 
-Auth::routes();
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

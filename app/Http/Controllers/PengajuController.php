@@ -29,10 +29,15 @@ class PengajuController extends Controller
     {
         
         //mencari data pengaju di database berdasarkan id
-        $pengaju = Pengajuan::find($id);
+        $data = Pengajuan::find($id);
 
-        return $pengaju->nama;
-        // return view('pengaju.profil');
+        // return $data->nama;
+        return view('pengaju.profil')->with('data', $data);
+    }
+
+    public function cetakProfil($id)
+    {
+        return 'cetak nama'.Pengajuan::find($id)->nama;
     }
 
     public function form()
@@ -97,58 +102,104 @@ class PengajuController extends Controller
             $data = Excel::load($path, function($reader){ // reader methods callback is optional
             })->get();
 
-            if(!empty($data) && $data->count()){
-                foreach ($data as $key => $value) {
-                    $insert[] = [
-                        'NIK' => $value->NIK,
+            if(!empty($data) && $data->count())
+            {
+                foreach ($data as $key => $value) 
+                {
+                    $insert = [
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                        'NIK' => $value->nik,
                         'nama' => $value->nama,
                         'kelamin' => $value->kelamin,
                         'tempat_lahir' => $value->tempat_lahir,
-                        'Tgl_Lahir' => $value->Tgl_Lahir,
-                        'Anak_Ke' => $value->Anak_Ke,
-                        'Jlh_Sdr' => $value->Jlh_Sdr,
-                        'Alamat_Anak' => $value->Alamat_Anak,
-                        'RT_Anak' => $value->RT_Anak,
-                        'RW_Anak' => $value->RW_Anak,
-                        'Desa_Anak' => $value->Desa_Anak,
-                        'Kec_Anak' => $value->Kec_Anak,
-                        'Deskripsi_Diri' => $value->Deskripsi_Diri,
-                        'HP_Telp' => $value->HP_Telp,
-                        'Photo' => $value->Photo,
-                        'Wilayah_Pembinaan' => $value->Wilayah_Pembinaan,
-                        'Jenjang_Pendidikan' => $value->Jenjang_Pendidikan,
-                        'Kelas_Smt' => $value->Kelas_Smt,
-                        'Nilai_IPK' => $value->Nilai_IPK,
-                        'Nama_Sklh_Kampus' => $value->Nama_Sklh_Kampus,
-                        'Alamat_Sekolah' => $value->Alamat_Sekolah,
-                        'Keberadaan_Ortu' => $value->Keberadaan_Ortu,
-                        'Nama_Ayah' => $value->Nama_Ayah,
-                        'Pend_Ayah' => $value->Pend_Ayah,
-                        'Alamat_Ayah' => $value->Alamat_Ayah,
-                        'Nama_Ibu' => $value->Nama_Ibu,
-                        'Pend_Ibu' => $value->Pend_Ibu,
-                        'Alamat_Ibu' => $value->Alamat_Ibu,
-                        'Nama_Wali' => $value->Nama_Wali,
-                        'Pend_Wali' => $value->Pend_Wali,
-                        'Alamat_Wali' => $value->Alamat_Wali,
+                        'Tgl_Lahir' => $value->tgl_lahir,
+                        'Anak_Ke' => $value->anak_ke,
+                        'Jlh_Sdr' => $value->jlh_sdr,
+                        'Alamat_Anak' => $value->alamat_anak,
+                        'RT_Anak' => $value->rt_anak,
+                        'RW_Anak' => $value->rw_anak,
+                        'Desa_Anak' => $value->desa_anak,
+                        'Kec_Anak' => $value->kec_anak,
+                        'Deskripsi_Diri' => $value->deskripsi_diri,
+                        'HP_Telp' => $value->hp_telp,
+                        'Photo' => $value->photo,
+                        'Wilayah_Pembinaan' => $value->wilayah_pembinaan,
+                        'Jenjang_Pendidikan' => $value->jenjang_pendidikan,
+                        'Kelas_Smt' => $value->kelas_smt,
+                        'Nilai_IPK' => $value->nilai_ipk,
+                        'Nama_Sklh_Kampus' => $value->nama_sklh_kampus,
+                        'Alamat_Sekolah' => $value->alamat_sekolah,
+                        'Keberadaan_Ortu' => $value->keberadaan_ortu,
+                        'Nama_Ayah' => $value->nama_ayah,
+                        'Pend_Ayah' => $value->pend_ayah,
+                        'Alamat_Ayah' => $value->alamat_ayah,
+                        'Nama_Ibu' => $value->nama_ibu,
+                        'Pend_Ibu' => $value->pend_ibu,
+                        'Alamat_Ibu' => $value->alamat_ibu,
+                        'Nama_Wali' => $value->nama_wali,
+                        'Pend_Wali' => $value->pend_wali,
+                        'Alamat_Wali' => $value->alamat_wali,
                         'penghasilan' => $value->penghasilan,
                         'stts_tinggal' => $value->stts_tinggal
                     ];
                 }
-                // if(!empty($insert)){
+                // if(!empty($insert))
+                // {
                 //     DB::table('pengajuan')->insert($insert);
                 //     dd('Insert Record successfully.');
                 // }
             }
-            // Pengajuan::create($data);
         }
-
-        $date = Carbon::now()->toDateTimeString();
 
         // return printf("Right now is %s", Carbon::now()->toDateTimeString());
 
         // return dd($insert[1]);
 
-        return dd($data[0]);
+        return dd($insert);
+    }
+
+    public function hitung_skor($pengaju)
+    {
+        $
+        $skor_jpa = array('SD' => 1, 'SMP' => 3/4, 'SMA/SMK/sederajat' => 2/4, 'Perguruan Tinggi' => 1/4 );
+
+
+        $
+
+        
+        if ($pendidikan_anak=='Perguruan Tinggi') {
+            switch ($nilai_akademik) {
+                case ($nilai_akademik<2):
+                    
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        } else {
+            # code...
+        }
+        
+
+        $keberadaan_ortu = array('Lengkap' => 1, 'Piatu' => 3/4, 'Yatim' => 2/4, 'Yatim Piatu' => 1/4 ); //keberadaan orang tua
+        $pendidikan_ortu = array('Tidak Sekolah' => 1, 'SD' => 3/4, 'SMP/sederajat' => 2/4, 'SMA/SMK/sederajat' => 1/4 ); //pendidikan ayah/ibu
+        $stts_tinggal = array('Menumpang' => 1, 'Sewa' => 2/3, 'Hak milik' => 1/3 );
+
+
+         
+        // Nilai Rata-Rata Akademik (NA) //pake if
+        // Jumlah Saudara (JS) //pake if
+        // Urutan Kelahiran (UK)   //pake if
+        // Keberadaan Orang Tua (KO) //
+        // Pendidikan Ayah (PA)
+        // Pendidikan Ibu (PI)
+        // Status Tempat Tinggal (TT)
+        // Satu Kecamatan dg Tp. Pembinaan (KP) //boolean
+        // Penghasilan Orang Tua/Wali (TP) //if
+        // Penghasilan Wali (PW) //if
+        // Lama Data Mengantri (LA) //sort by older
+
     }
 }

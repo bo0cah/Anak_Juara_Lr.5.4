@@ -27,6 +27,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('profil/{id}',[ 'uses' => 'PengajuController@profil','as' => 'profil']);
 
+	Route::get('cetakProfil/{id}',[ 'uses' => 'PengajuController@cetakProfil','as' => 'cetakProfil']);
+
 	Route::get('data-keluar','DataKeluarController@index');
 
 	Route::get('penerima', 'PenerimaController@index');

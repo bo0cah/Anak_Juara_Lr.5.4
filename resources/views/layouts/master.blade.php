@@ -37,7 +37,7 @@
 		<!--Memanggil template header-->
 		@include('layouts.header')
 
-		<div class="container">
+		<div class="container" style="padding-top: 80px">
 				<!--Memenggil konten halaman -->
 				@yield('content')
 		</div>

@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container" style="width: 1000px; padding-top: 50px">
-    <div class="row">
+
+    <div class="row" style="width: 1000px">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Daftar</div>
@@ -80,5 +80,5 @@
             </div>
         </div>
     </div>
-</div>
+
 @endsection

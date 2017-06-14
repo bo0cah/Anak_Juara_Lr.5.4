@@ -18,22 +18,22 @@ class CreatePengajuanTable extends Migration
             $table->timestamps('created_at');
             $table->string('NIK')->unique();
             $table->string('nama');
-            $table->string('kelamin');
+            $table->char('kelamin',9);
             $table->string('tempat_lahir');
             $table->date('Tgl_Lahir');
             $table->integer('Anak_Ke');
             $table->integer('Jlh_Sdr');
             $table->string('Alamat_Anak');
-            $table->string('RT_Anak');
-            $table->string('RW_Anak');
+            $table->integer('RT_Anak');
+            $table->integer('RW_Anak');
             $table->string('Desa_Anak');
             $table->string('Kec_Anak');
             $table->string('Deskripsi_Diri');
-            $table->string('Photo')->nullable();
+            $table->string('Photo')->default('default.png');
 
             $table->string('Wilayah_Pembinaan');
             $table->string('Jenjang_Pendidikan');
-            $table->string('Kelas_Smt');
+            $table->integer('Kelas_Smt');
             $table->decimal('Nilai_IPK');
             $table->string('Nama_Sklh_Kampus');
             $table->string('Alamat_Sekolah');
@@ -51,7 +51,7 @@ class CreatePengajuanTable extends Migration
             $table->string('Pend_Wali')->nullable();
             $table->string('Alamat_Wali')->nullable();
 
-            $table->string('penghasilan');
+            $table->double('penghasilan');
             $table->string('stts_tinggal');
             $table->string('HP_Telp');
         });
@@ -64,6 +64,6 @@ class CreatePengajuanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pengajuan');
+        Schema::dropIfExists('pengajuan');
     }
 }

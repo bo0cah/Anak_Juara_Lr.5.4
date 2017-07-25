@@ -163,10 +163,6 @@ class PengajuController extends Controller
     {
         $
         $skor_jpa = array('SD' => 1, 'SMP' => 3/4, 'SMA/SMK/sederajat' => 2/4, 'Perguruan Tinggi' => 1/4 );
-
-
-        $
-
         
         if ($pendidikan_anak=='Perguruan Tinggi') {
             switch ($nilai_akademik) {
